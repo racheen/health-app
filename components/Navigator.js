@@ -2,8 +2,10 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-import Home from "../pages/Home.js"
-import Settings from "../pages/Setting.js"
+import Home from "../screens/Home.js"
+import Settings from "../screens/Setting.js"
+import Activity from "../screens/Activity.js"
+import AddActivity from "../screens/AddActivity.js"
 
 const tabs = {
   Home: {
@@ -64,8 +66,11 @@ const Titlebar = createAppContainer(
     Home: {
       screen: Home,
     },
-    Settings: {
-      screen: Settings
+    Activity: {
+      screen: Activity,
+    },
+    AddActivity: {
+      screen: AddActivity
     }
   })
 );

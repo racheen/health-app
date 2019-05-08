@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import Home from "./pages/Home.js"
+import { StyleSheet, View, StatusBar } from 'react-native';
 import Navigator from "./components/Navigator.js"
 import {Constants} from 'expo'
 
