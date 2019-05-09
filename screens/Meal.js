@@ -17,10 +17,10 @@ class Activity extends React.Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.cardQuote}>Reading is to the mind what exercise is to the body -Joseph Addison</Text>
+                    <Text style={styles.cardQuote}>You are what you eat.</Text>
                     <Card navigation={navigation} type={'sum'} title={'Summary'} buttonLabel={''} subtitle={''} color={''}/>
-                    <Card navigation={navigation} type={'chart'} title={'Pedometer'} buttonLabel={'ADD STEPS'} subtitle={''} color={'#FF4D3C'}/>
-                    <Card navigation={navigation} type={'list'} title={'Activities'} buttonLabel={'VIEW MORE'} subtitle={''} color={'#FF4D3C'}/>
+                    <Card navigation={navigation} type={'chart'} title={'Nutrient Chart'} buttonLabel={'DETAILS'} subtitle={''} color={'#82C5E6'}/>
+                    <Card navigation={navigation} type={'list'} title={'Meals'} buttonLabel={'VIEW MORE'} subtitle={''} color={'#82C5E6'}/>
                 </View>
             </ScrollView>
         );

@@ -8,7 +8,7 @@ export default StyleSheet.create({
         // width: 400,
     },
     box: {
-        height: 210,
+        // height: 210,
         width: 380,
         backgroundColor: '#F9F9F9',
         marginTop: 10,
@@ -33,7 +33,9 @@ export default StyleSheet.create({
           marginBottom: 5,
           marginLeft: 15,
           marginRight: 15,
-          
+        //   flex: 1,
+        //   alignItems: 'center'
+        //   height: 200,
     },
     button: {
         paddingLeft: 140,

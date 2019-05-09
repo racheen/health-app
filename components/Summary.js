@@ -1,71 +1,68 @@
-import React from 'react'
-import { StyleSheet, Text, View, ScrollView, Button, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { Text, View, ScrollView, Button, TouchableOpacity, StyleSheet } from 'react-native'
 
-class Summary extends React.Component {
+class Summary extends Component {
+ 
     render() {
+ 
         return (
-            <View style={styles.summaryContainer}>
-                <SummaryRow/>
-                <SummaryRow/>
+            <View style={{paddingBottom:10, paddingTop:10}}>
+                <SummaryContainer/>
+                <SummaryContainer/>
             </View>
         );
     }
 }
 
-class SummaryRow extends React.Component {
+class SummaryContainer extends Component {
+ 
     render() {
+ 
         return (
-            <View style={styles.summaryRow}>
-                <SummaryItem data={'STEPS'}/>
-                <SummaryItem data={'CALORIES'}/>
-                <SummaryItem data={'DURATION'}/>
-            </View>
+                <View style={styles.summaryContainer}>
+                    <SummaryItem/>
+                    <SummaryItem/>
+                    <SummaryItem/>
+                </View>
         );
     }
 }
 
-class SummaryItem extends React.Component {
-    render () {
+class SummaryItem extends Component {
+ 
+    render() {
+ 
         return (
-            <View style={styles.summaryItem}>
-                <Text style={styles.summaryLabel}>{this.props.data}</Text>
-                <Text style={styles.summaryInfo}>74903</Text>
-            </View>
-            
+                <View style={styles.summaryItem}>
+                    <Text style={styles.label}>STEPS</Text>
+                    <Text style={styles.info}>43853</Text>
+                </View>
         );
     }
 }
+
 
 const styles = StyleSheet.create({
-    summaryContainer:{
-        flex: 1,
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 10,
-        marginBottom: 10,
-        justifyContent: 'center',
+    summaryContainer: {
+        // flex: 1,
         alignItems: 'center',
-        // borderWidth: 1
-    },
-    summaryRow: {
-        flex: 1,
+        // justifyContent: 'space-around',
+        flexWrap: 'wrap',
+        // height: 100,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'stretch',
         // borderWidth: 1
+        padding:2
     },
     summaryItem: {
         flex: 3,
-        margin: 5,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        // flexWrap: 'wrap',
+        // height: 100,
+        // flexDirection: 'row',
         // borderWidth: 1
-    },
-    summaryLabel: {
-        fontSize: 13,
-        fontWeight: '500'
-    },
-    summaryInfo: {
-        fontSize: 13
+        margin: 5
     }
-})
+});
 
 export default Summary

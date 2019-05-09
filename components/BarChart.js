@@ -5,7 +5,10 @@ class BarChartExample extends React.PureComponent {
  
     render() {
  
-        const fill = '#FDBAAF'
+        const {color} = this.props
+        // console.log('color', color)
+        const fill = color
+        // console.log('fill', fill)
         const data   = [10, 6, 3, 2, 8, 6, 6]
  
         return (

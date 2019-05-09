@@ -18,7 +18,10 @@ class Home extends Component {
     return (
     <ScrollView>
       <View style={styles.container}>
-        <Card navigation={navigation} title={'Activity'} buttonLabel={'Add Activity'} subtitle={''} color={'#FF4D3C'}/>
+        <Card navigation={navigation} type={'chart'} title={'Activity'} buttonLabel={'ADD ACTIVITY'} subtitle={''} color={'#FF4D3C'}/>
+        <Card navigation={navigation} type={'chart'} title={'Meal'} buttonLabel={'ADD MEAL'} subtitle={''} color={'#82C5E6'}/>
+        <Card navigation={navigation} type={'chart'} title={'Sleep'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'}/>
+        <Card navigation={navigation} type={'quote'} title={'Mindfulness'} buttonLabel={''} subtitle={''} color={'#79C8A6'}/>
       </View>
     </ScrollView>
     )
