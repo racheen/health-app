@@ -22,7 +22,7 @@ class Card extends Component {
                     </TouchableOpacity>)
             default:
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate(title)}> 
+                    <TouchableOpacity onPress={() => navigation.navigate(title, {color:color})}> 
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
                         <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type}/>

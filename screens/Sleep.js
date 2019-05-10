@@ -18,7 +18,20 @@ class Activity extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.cardQuote}>Avoid strenours mental activity before bed.</Text>
-                    <View style={styles.category}></View>
+                    <View style={styles.category}>
+                        <View style={styles.categoryDay}>
+                            <Text>Day</Text>
+                        </View>
+                        <View style={styles.categoryWeek}>
+                            <Text>Week</Text>
+                        </View>
+                        <View style={styles.categoryMonth}>
+                            <Text>Month</Text>
+                        </View>
+                        <View style={styles.categoryYear}>
+                            <Text>Year</Text>
+                        </View>
+                    </View>
                     <Card navigation={navigation} type={'chart'} title={'Sleep'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''}/>
                 </View>
             </ScrollView>
