@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
         margin: 3,
         padding: 5,
         // backgroundColor: '#FDBAAF'
+        borderRadius: 5
     }
 });
 

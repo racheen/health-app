@@ -7,6 +7,7 @@ import Settings from "../screens/Setting.js"
 import Activity from "../screens/Activity.js"
 import AddActivity from "../screens/AddActivity.js"
 import Meal from "../screens/Meal.js"
+import Sleep from "../screens/Sleep.js"
 
 const tabs = {
   Home: {
@@ -75,6 +76,9 @@ const Titlebar = createAppContainer(
     },
     Meal: {
       screen: Meal,
+    },
+    Sleep: {
+      screen: Sleep,
     }
   })
 );

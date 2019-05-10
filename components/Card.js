@@ -51,7 +51,7 @@ class Card extends Component {
         const {navigation, title, subtitle, buttonLabel, data, color, type} = this.props
         return (
             <View style={[styles.box]}>
-                    {this.handleCard(title, buttonLabel, subtitle, color, navigation, type)}
+                {this.handleCard(title, buttonLabel, subtitle, color, navigation, type)}
                 <View style = {styles.container}>
                     {this.handleCardButton(title, buttonLabel, color, navigation, type)}
                 </View>

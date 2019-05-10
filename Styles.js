@@ -54,5 +54,15 @@ export default StyleSheet.create({
         paddingLeft: 30,
         paddingRight: 30,
         paddingBottom: 10
+    },
+    category:{
+        width: 86,
+        height: 21,
+        marginLeft:17,
+        marginTop: 92,
+        backgroundColor:'#F9F9F9',
+        borderWidth: 1,
+        borderColor: '#6EB1CB',
+        borderRadiusLeft: 10,
     }
 });
