@@ -4,13 +4,6 @@ import Card from '../components/Card.js'
 import styles from '../Styles.js'
 
 class Home extends Component {
-  static navigationOptions = ({ navigation }) => {
-        return {
-            title: `Health App`,
-            // headerStyle: {height: 25},
-            headerTitleStyle: {flex:1, marginLeft:157, paddingBottom:30, justifyContent:'center', alignItems: 'center',}
-        }
-      }
     
   render() {
     const handlePress = () => false

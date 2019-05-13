@@ -4,10 +4,13 @@ import BarChartExample from './BarChart.js'
 import styles from '../Styles.js'
 import Summary from './Summary.js'
 import ListAct from './ListAct.js'
+import FormData from './FormData.js'
 
 class CardItem extends Component {
     handleCardItem(title, color, type) {
         switch(type) {
+            case 'form':
+                return <FormData title={title}/>
             case 'sum':
                 return <Summary/>
             case 'list':

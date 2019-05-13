@@ -5,8 +5,9 @@ import ListAct from '../components/ListAct.js';
 
 class Details extends Component {
     static navigationOptions = ({ navigation }) => {
+        const {title} = navigation.state.params
         return {
-            title: `Activities`,
+            title: title,
             // headerTitleStyle: {marginLeft:127},
             headerStyle : {paddingBottom:30},
         }
