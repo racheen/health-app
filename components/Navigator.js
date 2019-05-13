@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import Home from "../screens/Home.js"
-import Settings from "../screens/Setting.js"
+import Profile from "../screens/Profile.js"
 import Activity from "../screens/Activity.js"
 import AddActivity from "../screens/AddActivity.js"
 import Meal from "../screens/Meal.js"
@@ -13,14 +13,14 @@ import Details from "../screens/Details.js"
 const tabs = {
   Home: {
     screen: Home,
-    navigationOptions: () => ({
-      title: `Home`,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Home',
     }),
   },
-  Settings: {
-    screen: Settings,
-    navigationOptions: () => ({
-      title: `Settings`,
+  Profile: {
+    screen: Profile,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Profile',
     }),
   }
 }
@@ -41,8 +41,8 @@ const getTitleName = (navigation) => {
   const {routeName} = navigation.state;
   if (routeName === 'Home') {
     title = 'Home'
-  } else if (routeName === 'Settings') {
-    title = 'Settings'
+  } else {
+    title = 'Profile'
   }
 
   return title;
@@ -53,8 +53,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
       let iconName;
       if (routeName === 'Home') {
         iconName = `ios-home${focused ? '' : ''}`;
-      } else if (routeName === 'Settings') {
-        iconName = `ios-options${focused ? '' : ''}`;
+      } else if (routeName === 'Profile') {
+        iconName = `ios-person${focused ? '' : ''}`;
       }
     
       // You can return any component that you like here!
@@ -67,24 +67,46 @@ const Nav = createAppContainer(Platform.OS === 'ios'
 const Titlebar = createAppContainer(
   createStackNavigator({
     Home: {
-      screen: Home,
+      screen: Nav,
+      navigationOptions: () => ({
+        title: 'Health App',
+        headerTitleStyle: {flex:1, marginLeft:157, paddingBottom:30, justifyContent:'center', alignItems: 'center',}
+      }),
     },
     Activity: {
       screen: Activity,
-    },
-    ADDACTIVITY: {
-      screen: AddActivity
+      navigationOptions: () => ({
+        title: `Activity`,
+      }),
     },
     Meal: {
       screen: Meal,
+      navigationOptions: () => ({
+        title: `Meal`,
+      }),
     },
     Sleep: {
       screen: Sleep,
+      navigationOptions: () => ({
+        title: `Sleep`,
+      }),
+    },
+    ADDACTIVITY: {
+      screen: AddActivity,
+      navigationOptions: () => ({
+        title: `Add Activity`,
+      }),
     },
     Activities: {
       screen: Details,
     },
     Meals: {
+      screen: Details,
+    },
+    Pedometer: {
+      screen: Details,
+    },
+    NutrientChart: {
       screen: Details,
     }
   })

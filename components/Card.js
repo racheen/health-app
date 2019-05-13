@@ -15,14 +15,14 @@ class Card extends Component {
                     </View>)
             case 'quote':
                 return  (
-                    <TouchableOpacity onPress={() => navigation.navigate(title)}> 
+                    <TouchableOpacity onPress={() => navigation.navigate(title.replace(/\s+/, ""))}> 
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
                         <Text style={[styles.cardQuote, {color}]}>How are you today</Text>
                     </TouchableOpacity>)
             default:
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate(title, {color:color})}> 
+                    <TouchableOpacity onPress={() => navigation.navigate(title.replace(/\s+/, ""), {color:color, title:title})}> 
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
                         <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type}/>

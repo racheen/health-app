@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 class Settings extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-      title: `Hello`
-    }
   
     render() {
       return (
