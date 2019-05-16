@@ -1,29 +1,39 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Modal, Alert, TextInput} from 'react-native'
-import Styles from '../Styles';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux'
+import { getProfile } from '../actions/profile';
 
-class Profile extends React.Component {
-  state = {
-    content: '',
+profile = {
+  name: 'Hello',
+  gender: 'Female'
+}
+
+class Profile extends React.Component {  
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(getProfile(profile))
   }
-    render() {
-      return (
-        <View style={{ flex: 1, marginLeft: 10, marginRight: 10 }}>
-          <Label label={'Name'} content={this.state.content}/>
-          <Label label={'Gender'} content={this.state.content}/>
-          <Label label={'Date of Birth'} content={this.state.content}/>
-          <Label label={'Height'} content={this.state.content}/>
-          <Label label={'Weight'} content={this.state.content}/>
-        </View>
-      );
-    }
+  render() {
+    const { profile } = this.props
+    // console.log('profile', this.props)
+    // console.log('profile name', profile.profile.name)
+    return (
+      <View style={{ flex: 1, marginLeft: 10, marginRight: 10 }}>
+        <Label label={'Name'} content={profile.profile.name}/>
+        <Label label={'Gender'} content={profile.profile.gender}/>
+        <Label label={'Date of Birth'} content={''}/>
+        <Label label={'Height'} content={''}/>
+        <Label label={'Weight'} content={''}/>
+      </View>
+    );
+  }
 }
 
 class Label extends React.Component {
   state = {
     modalVisible: false,
-    content: 'hi',
+    content: this.props.content
   }
 
   setModalVisible(visible) {
@@ -33,10 +43,14 @@ class Label extends React.Component {
   setContent(content) {
     this.setState({content: content,
                    modalVisible: false})
+    this.props.content = content
+    console.log('content setContent', this.props.content)
+    this.props.saveProfile(content)
   }
 
   render() {
-    const {label} = this.props
+    const {label, content} = this.props
+    console.log('content', this.props.content)
     let IconComponent = Ionicons
     return (
       <View style={styles.label}>
@@ -142,4 +156,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile
+function mapStateToProps (profile) {
+  return {
+      profile
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    saveProfile: (profile)=> dispatch(saveProfile(profile))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

@@ -1,7 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
 import Navigator from "./components/Navigator.js"
-import {Constants} from 'expo'
+import { Constants } from 'expo'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './reducers'
+import middleware from './middleware'
 
 function StatBar ({backgroundColor, ...props}){
   return (
@@ -14,10 +18,12 @@ function StatBar ({backgroundColor, ...props}){
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StatBar backgroundColor='#F9F9F9' barStyle='light-content'/>
-        <Navigator/>
-      </View>
+      <Provider store={createStore(reducer,middleware)}>
+        <View style={styles.container}>
+          <StatBar backgroundColor='#F9F9F9' barStyle='light-content'/>
+          <Navigator/>
+        </View>
+      </Provider>
     );
   }
 }
