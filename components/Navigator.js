@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Platform } from 'react-native'
+import { StyleSheet, Text, View, Platform, TouchableOpacity } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import Home from "../screens/Home.js"
 import Profile from "../screens/Profile.js"
@@ -95,6 +95,15 @@ const Titlebar = createAppContainer(
       screen: AddActivity,
       navigationOptions: () => ({
         title: `Add Activity`,
+        headerRight: (
+          <TouchableOpacity
+            onPress={() => console.log(this.state.activity)}
+            title="Info"
+            color="#fff"
+          >
+          <Ionicons style={{marginRight: 20}} name={'ios-checkmark'} size={40} color={'black'} />
+          </TouchableOpacity>
+        ),
       }),
     },
     Activities: {

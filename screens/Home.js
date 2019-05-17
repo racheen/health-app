@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, Button, TouchableOpacity } from 'react-native'
-import Card from '../components/Card.js'
+import Menu from '../components/Menu.js'
 import styles from '../Styles.js'
 
 class Home extends Component {
@@ -10,11 +10,17 @@ class Home extends Component {
     const {navigation} = this.props
     return (
     <ScrollView>
-      <View style={styles.container}>
-        <Card navigation={navigation} type={'chart'} title={'Activity'} buttonLabel={'ADD ACTIVITY'} subtitle={''} color={'#FF4D3C'}/>
-        <Card navigation={navigation} type={'chart'} title={'Meal'} buttonLabel={'ADD MEAL'} subtitle={''} color={'#82C5E6'}/>
-        <Card navigation={navigation} type={'chart'} title={'Sleep'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'}/>
-        <Card navigation={navigation} type={'quote'} title={'Mindfulness'} buttonLabel={''} subtitle={''} color={'#79C8A6'}/>
+      <View style={{flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        padding: 20,
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    }}>
+        <Menu navigation={navigation} type={'chart'} title={'Activity'} color={'#FF4D3C'}/>
+        <Menu navigation={navigation} type={'chart'} title={'Meal'} color={'#82C5E6'}/>
+        <Menu navigation={navigation} type={'chart'} title={'Sleep'} color={'#096B91'}/>
+        <Menu navigation={navigation} type={'quote'} title={'Mindfulness'} color={'#79C8A6'}/>
       </View>
     </ScrollView>
     )

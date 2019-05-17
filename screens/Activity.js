@@ -20,7 +20,7 @@ class Activity extends React.Component {
                     <Text style={styles.cardQuote}>Reading is to the mind what exercise is to the body -Joseph Addison</Text>
                     <Card navigation={navigation} type={'sum'} title={'Summary'} buttonLabel={''} subtitle={''} color={''}/>
                     <Card navigation={navigation} type={'chart'} title={'Pedometer'} buttonLabel={'ADD STEPS'} subtitle={''} color={'#FF4D3C'}/>
-                    <Card navigation={navigation} type={'list'} title={'Activities'} buttonLabel={'VIEW MORE'} subtitle={''} color={'#FF4D3C'}/>
+                    <Card navigation={navigation} type={'list'} title={'Activities'} buttonLabel={'ADD ACTIVITY'} subtitle={''} color={'#FF4D3C'}/>
                 </View>
             </ScrollView>
         );
