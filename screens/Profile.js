@@ -3,28 +3,42 @@ import { StyleSheet, Text, View, TouchableHighlight, Modal, Alert, TextInput} fr
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux'
 import { getProfile } from '../actions/profile';
+import { Constants, SQLite } from 'expo';
 
-profile = {
-  name: 'Hello',
-  gender: 'Female'
-}
+const db = SQLite.openDatabase('db.db');
 
 class Profile extends React.Component {  
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(getProfile(profile))
+  state = {
+    profile: {
+      name: null,
+      gender: null,
+      dob: null,
+      height: null,
+      weight: null
+    }
   }
+
+  componentDidMount() {
+    this.getData()
+  }
+
+  getData = () => {
+    db.transaction(tx => {
+      tx.executeSql('create table if not exists profile (id integer primary key not null, name text, gender text, dob date, height int, weight int);');
+      tx.executeSql('select * from profile',[],(tx,results)=>(this.setState({profile:results.rows.item(0)})));
+      // tx.executeSql('select * from profile',[],(tx,results)=>(console.log('db',results)));
+    });
+  }
+
   render() {
-    const { profile } = this.props
-    // console.log('profile', this.props)
-    // console.log('profile name', profile.profile.name)
+    console.log('state', this.state.profile)
     return (
       <View style={{ flex: 1, marginLeft: 10, marginRight: 10 }}>
-        <Label label={'Name'} content={profile.profile.name}/>
-        <Label label={'Gender'} content={profile.profile.gender}/>
-        <Label label={'Date of Birth'} content={''}/>
-        <Label label={'Height'} content={''}/>
-        <Label label={'Weight'} content={''}/>
+        <Label label={'Name'} content={this.state.profile.name} updateState={this.getData}/>
+        <Label label={'Gender'} content={this.state.profile.gender} updateState={this.getData}/>
+        {/* <Label label={'Date of Birth'} content={this.state.profile.dob}/>
+        <Label label={'Height'} content={this.state.profile.height}/>
+        <Label label={'Weight'} content={this.state.profile.weight}/> */}
       </View>
     );
   }
@@ -36,6 +50,78 @@ class Label extends React.Component {
     content: this.props.content
   }
 
+  update(content,label) {
+    switch(label){
+      case 'Name':
+        return(
+          db.transaction(tx => {
+            tx.executeSql(`update profile set name = ? where id=1;`, [content]);
+            tx.executeSql('select * from profile',[],(_,{rows})=>console.log(JSON.stringify(rows)));
+          })
+        )
+      case 'Gender':
+          if (content === 'female' || content === 'male'){
+            return(
+              db.transaction(tx => {
+                tx.executeSql(`update profile set gender = ? where id=1;`, [content]);
+                tx.executeSql('select * from profile',[],(_,{rows})=>console.log(JSON.stringify(rows)));
+              })
+            )
+          }else {
+            return(
+             null
+            )
+          }
+      case 'Date of Birth':
+          if (content === 'female' || content === 'male'){
+            return(
+              db.transaction(tx => {
+                tx.executeSql(`update profile set dob = ? where id=1;`, [content]);
+                tx.executeSql('select * from profile',[],(_,{rows})=>console.log(JSON.stringify(rows)));
+              })
+            )
+          }else {
+            return(
+             null
+            )
+          }
+      case 'Height':
+          if (isNaN(content)){
+            return(
+              db.transaction(tx => {
+                tx.executeSql(`update profile set height = ? where id=1;`, [content]);
+                tx.executeSql('select * from profile',[],(_,{rows})=>console.log(JSON.stringify(rows)));
+              })
+            )
+          }else {
+            return(
+             null
+            )
+          }
+      case 'Weight':
+          if (isNaN(content)){
+            return(
+              db.transaction(tx => {
+                tx.executeSql(`update profile set weight = ? where id=1;`, [content]);
+                tx.executeSql('select * from profile',[],(_,{rows})=>console.log(JSON.stringify(rows)));
+              })
+            )
+          }else {
+            return(
+             null
+            )
+          }
+      default:
+        return(
+          db.transaction(tx => {
+            tx.executeSql(`update profile set name = ? where id=1;`, [content]);
+            tx.executeSql('select * from profile',[],(_,{rows})=>console.log(JSON.stringify(rows)));
+          })
+        )
+    }
+    
+  }
+
   setModalVisible(visible) {
     this.setState({modalVisible: visible})
   }
@@ -43,19 +129,22 @@ class Label extends React.Component {
   setContent(content) {
     this.setState({content: content,
                    modalVisible: false})
-    this.props.content = content
-    console.log('content setContent', this.props.content)
-    this.props.saveProfile(content)
+  }
+
+  updateData = () => {
+    this.props.updateState()
   }
 
   render() {
-    const {label, content} = this.props
-    console.log('content', this.props.content)
+    const {label} = this.props
+    this.content = this.props.content
+    console.log('this.content', this.content)
+    console.log('this.state.content', this.state.content)
     let IconComponent = Ionicons
     return (
       <View style={styles.label}>
         <Text style={{flex:4}}>{label}</Text>
-        <Text style={{flex:1, marginRight: 0}}>{this.state.content}</Text>
+        <Text style={{flex:1, marginRight: 0}}>{this.props.content}</Text>
         <TouchableHighlight
           onPress={() => {
             this.setModalVisible(true);
@@ -78,11 +167,22 @@ class Label extends React.Component {
               <TextInput
                 style={{height: 40, borderWidth: 1, borderBottomColor: 'gray', padding:10}}
                 onChangeText={(content) => this.setState({content})}
-                placeholder='hello'
+                onSubmitEditing={()=>{
+                  this.setContent(this.state.content);
+                  this.update(this.state.content,label);
+                  this.updateData();
+                }}
+                placeholder={label}
+                value = {this.state.content}
               />
             </View>
             <View style = {styles.container}>
-              <TouchableHighlight onPress={() => this.setContent(this.state.content)} style={{paddingBottom:10, paddingTop:10}}>
+              <TouchableHighlight onPress={() => {
+                this.setContent(this.state.content);
+                this.update(this.state.content,label);
+                this.updateData();
+                }} 
+                style={{paddingBottom:10, paddingTop:10}}>
                 <Text style = {styles.button}>
                   OK
                 </Text>
@@ -168,4 +268,5 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+// export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default Profile
