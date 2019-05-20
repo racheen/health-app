@@ -21,17 +21,20 @@ class Profile extends Component {
   }
 
   getData = () => {
-    db.transaction(tx => {
-      tx.executeSql('create table if not exists profile (id integer primary key not null, name text, gender text, dob date, height int, weight int);');
-      tx.executeSql('select * from profile',[],(tx,results)=>(
-        results.rows.item(0).id === undefined ? tx.executeSql('insert into profile name, gender, dob, height, weight values (null,null,null,null,null)') : this.setState({profile:results.rows.item(0)}) 
-      ));
-      // tx.executeSql('drop table profile');
-      // tx.executeSql('select * from profile where id=1',[],(tx,results)=>(console.log('db',results)));
-      // tx.executeSql('select * from profile where id=1',[],(tx,results)=>this.setState({profile:results.rows.item(0)}));
+    db.transaction(
+      tx => {
+        // tx.executeSql('DROP TABLE IF EXISTS profile',[],(_,results)=>console.log('drop table'));
+        tx.executeSql('CREATE TABLE IF NOT EXISTS profile (id integer primary key not null, name text, gender text, dob date, height INTEGER, weight INTEGER)',[],(_,results)=>console.log('add table'));
+        // tx.executeSql('select * from profile',[],(tx,results)=>(console.log('db',results)));
+        tx.executeSql('select * from profile',[],(tx,results)=>(
+          results.rows.length === 0 ? tx.executeSql('INSERT INTO profile (name, gender, dob, height, weight) VALUES (?,?,?,?,?)',[null,null,null,null,null],(_,{rows})=>console.log('add succesfully')) : this.setState({profile:results.rows.item(0)})
+        ));
+        // tx.executeSql('insert into profile name, gender, dob, height, weight values (?,?,?,?,?)',["hello","hello","hello","hello","hello"],(_,{rows})=>console.log('add succesfully'));
+        // tx.executeSql('INSERT INTO profile (name, gender, dob, height, weight) VALUES (?,?,?,?,?)',[null,null,null,null,null],(_,{rows})=>console.log('add succesfully'));
+        // tx.executeSql('select * from profile where id=1',[],(tx,results)=>this.setState({profile:results.rows.item(0)}));
     });
   }
-
+  
   render() {
     console.log('state', this.state.profile)
     return (

@@ -95,15 +95,6 @@ const Titlebar = createAppContainer(
       screen: AddActivity,
       navigationOptions: () => ({
         title: `Add Activity`,
-        headerRight: (
-          <TouchableOpacity
-            onPress={() => console.log(this.state.activity)}
-            title="Info"
-            color="#fff"
-          >
-          <Ionicons style={{marginRight: 20}} name={'ios-checkmark'} size={40} color={'black'} />
-          </TouchableOpacity>
-        ),
       }),
     },
     Activities: {
