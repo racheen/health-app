@@ -14,7 +14,7 @@ class CardItem extends Component {
             case 'sum':
                 return <Summary/>
             case 'list':
-                return <ListAct color={color}/>
+                return <ListAct color={color} full={false}/>
             default:
                 return <BarChartExample color={color}/>
         }

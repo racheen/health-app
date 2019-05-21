@@ -7,6 +7,7 @@ import Profile from "../screens/Profile.js"
 import Activity from "../screens/Activity.js"
 import AddActivity from "../screens/AddActivity.js"
 import Meal from "../screens/Meal.js"
+import AddMeal from "../screens/AddMeal.js"
 import Sleep from "../screens/Sleep.js"
 import AddSleep from "../screens/AddSleep.js"
 import Details from "../screens/Details.js"
@@ -96,6 +97,12 @@ const Titlebar = createAppContainer(
       screen: AddActivity,
       navigationOptions: () => ({
         title: `Add Activity`,
+      }),
+    },
+    ADDMEAL: {
+      screen: AddMeal,
+      navigationOptions: () => ({
+        title: `Add Meal`,
       }),
     },
     ADDSLEEP: {

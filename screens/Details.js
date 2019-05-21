@@ -12,14 +12,14 @@ class Details extends Component {
             headerStyle : {paddingBottom:30},
         }
     }
-
+    
     render() {
         const {navigation} = this.props
         const {color} = navigation.state.params
         return (
             <ScrollView>
                 <View style={[styles.container, {alignItems:'stretch', margin:10}]}>
-                    <ListAct color={color}></ListAct>
+                    <ListAct color={color} full={true}></ListAct>
                 </View>
             </ScrollView>
         );

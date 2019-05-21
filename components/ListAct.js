@@ -16,7 +16,10 @@ class ListAct extends Component {
                 tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else {
-            this.setState({items:'hello'})
+            db.transaction(tx => {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('SELECT * FROM meal',[],(tx,results)=>this.setState({items:results.rows._array}));
+            })
         }
         console.log('results', this.state)
     }
@@ -37,39 +40,96 @@ class ListAct extends Component {
     }
 
     render() {
-        const {color} = this.props
+        const {color, full} = this.props
         console.log('results', this.state)
-        return (
-            <View style={styles.listContainer}>
-                {this.state.items != null 
-                    ? this.state.items.map(({id, fitnessact, duration, distance, calories, date})=>
-                        <ListItem
-                            style={{
-                                backgroundColor: '#1c9963',
-                                borderColor: '#000',
-                                borderWidth: 1,
-                                padding: 8
-                            }}
-                            key = {id}
-                            color={color} 
-                            content={{fitnessact, duration, distance, calories, date}}/>
-                    ) 
-                    : console.log('no items')
-                }
-                {/* <ListItem color={color}/>
-                <ListItem color={color}/>
-                <ListItem color={color}/> */}
-            </View>
-        );
+        const type = this.state.type
+        switch (type) {
+            case 'activity': 
+            return (
+                <View style={styles.listContainer}>
+                    {full ? 
+                        (this.state.items != null 
+                        ? this.state.items.map(({id, fitnessact, duration, distance, calories, date})=>
+                            <ListItem
+                                style={{
+                                    backgroundColor: '#1c9963',
+                                    borderColor: '#000',
+                                    borderWidth: 1,
+                                    padding: 8
+                                }}
+                                key = {id}
+                                color={color} 
+                                content={{fitnessact, duration, distance, calories, date}}
+                                type= {type}/>
+                        ) 
+                        : console.log('no items'))
+                        : (this.state.items != null 
+                            ? this.state.items.slice(0,3).map(({id, fitnessact, duration, distance, calories, date})=>
+                                <ListItem
+                                    style={{
+                                        backgroundColor: '#1c9963',
+                                        borderColor: '#000',
+                                        borderWidth: 1,
+                                        padding: 8
+                                    }}
+                                    key = {id}
+                                    color={color} 
+                                    content={{fitnessact, duration, distance, calories, date}}
+                                    type= {type}/>
+                            ) 
+                            : console.log('no items'))
+                    }
+                </View>
+            );
+            default: 
+            return (
+                <View style={styles.listContainer}>
+                    {full ? 
+                        (this.state.items != null 
+                        ? this.state.items.map(({id, mealname, fats, proteins, calories, date})=>
+                            <ListItem
+                                style={{
+                                    backgroundColor: '#1c9963',
+                                    borderColor: '#000',
+                                    borderWidth: 1,
+                                    padding: 8
+                                }}
+                                key = {id}
+                                color={color} 
+                                content={{mealname, fats, proteins, calories, date}}
+                                type= {type}/>
+                        ) 
+                        : console.log('no items'))
+                        : (this.state.items != null 
+                            ? this.state.items.slice(0,3).map(({id, mealname, fats, proteins, calories, date})=>
+                                <ListItem
+                                    style={{
+                                        backgroundColor: '#1c9963',
+                                        borderColor: '#000',
+                                        borderWidth: 1,
+                                        padding: 8
+                                    }}
+                                    key = {id}
+                                    color={color} 
+                                    content={{mealname, fats, proteins, calories, date}}
+                                    type= {type}/>
+                            ) 
+                            : console.log('no items'))
+                    }
+                </View>
+            );
+        }
     }
 }
 
 class ListItem extends Component {
  
     render() {
-        const {color, content} = this.props
+        const {color, content, type} = this.props
         // console.log('ListItem', {color})
-        return (
+        switch (type) {
+            case 'activity': 
+            return (
                 <View style={[styles.listItem, {backgroundColor:color}]}>
                     <View style={styles.div1}>
                         <Text style={styles.title}>
@@ -85,7 +145,26 @@ class ListItem extends Component {
                         {content.calories}
                     </Text>
                 </View>
-        );
+            );
+            default: 
+            return (
+                <View style={[styles.listItem, {backgroundColor:color}]}>
+                    <View style={styles.div1}>
+                        <Text style={styles.title}>
+                            {content.mealname}
+                        </Text>
+                        <View style={styles.contents}>
+                            <Text style={styles.content}>{content.date}</Text>
+                            <Text style={styles.content}>{content.fats}</Text>
+                            <Text style={styles.content}>{content.proteins}</Text>
+                        </View>
+                    </View>
+                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                        {content.calories}
+                    </Text>
+                </View>
+            );
+        }
     }
 }
 

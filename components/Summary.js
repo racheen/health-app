@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, Button, TouchableOpacity, StyleSheet } from 'react-native'
+import { SQLite } from 'expo';
+
+const db = SQLite.openDatabase('db.db');
 
 class Summary extends Component {
- 
     render() {
- 
         return (
             <View style={{paddingBottom:10, paddingTop:10}}>
                 <SummaryContainer/>
@@ -31,7 +32,6 @@ class SummaryContainer extends Component {
 class SummaryItem extends Component {
  
     render() {
- 
         return (
                 <View style={styles.summaryItem}>
                     <Text style={styles.label}>STEPS</Text>
