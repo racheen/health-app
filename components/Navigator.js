@@ -8,6 +8,7 @@ import Activity from "../screens/Activity.js"
 import AddActivity from "../screens/AddActivity.js"
 import Meal from "../screens/Meal.js"
 import Sleep from "../screens/Sleep.js"
+import AddSleep from "../screens/AddSleep.js"
 import Details from "../screens/Details.js"
 
 const tabs = {
@@ -95,6 +96,12 @@ const Titlebar = createAppContainer(
       screen: AddActivity,
       navigationOptions: () => ({
         title: `Add Activity`,
+      }),
+    },
+    ADDSLEEP: {
+      screen: AddSleep,
+      navigationOptions: () => ({
+        title: `Add Sleep`,
       }),
     },
     Activities: {
