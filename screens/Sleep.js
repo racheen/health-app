@@ -32,7 +32,7 @@ class Activity extends React.Component {
                             <Text>Year</Text>
                         </View>
                     </View>
-                    <Card navigation={navigation} type={'chart'} title={'Sleep'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''}/>
+                    <Card navigation={navigation} type={'chart'} title={'Sleep'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''} screen={'sleep'}/>
                 </View>
             </ScrollView>
         );

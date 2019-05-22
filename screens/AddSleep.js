@@ -47,6 +47,7 @@ class AddActivity extends Component {
         tx.executeSql('select * from sleep',[],(tx,results)=>(console.log('db',results)));
       })
       // console.log('added db 3')
+      this.props.navigation.navigate('Sleep')
   }
 
   getData = (content, label) => {

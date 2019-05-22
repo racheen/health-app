@@ -4,21 +4,21 @@ import styles from '../Styles.js'
 import CardItem from './CardItem.js'
 
 class Card extends Component {
-    handleCard(title, buttonLabel, subtitle, color, navigation, type) {
+    handleCard(title, buttonLabel, subtitle, color, navigation, type, screen) {
         switch(type) {
             case 'form':
                 return  (
                     <View>
                         <Text style={[styles.cardLabel, {alignContent:'center'}]}>{title}</Text>
                         <View style={styles.divider}/>
-                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type}/>
+                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen}/>
                     </View>)
             case 'sum':
                 return  (
                     <View>
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
-                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type}/>
+                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen}/>
                     </View>)
             case 'quote':
                 return  (
@@ -32,7 +32,7 @@ class Card extends Component {
                     <TouchableOpacity onPress={() => navigation.navigate(title.replace(/\s+/, ""), {color:color, title:title})}> 
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
-                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type}/>
+                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen}/>
                     </TouchableOpacity>)
         }
     }
@@ -63,10 +63,10 @@ class Card extends Component {
 
     render() {
         const handlePress = () => false
-        const {navigation, title, subtitle, buttonLabel, data, color, type} = this.props
+        const {navigation, title, subtitle, buttonLabel, data, color, type, screen} = this.props
         return (
             <View style={[styles.box]}>
-                {this.handleCard(title, buttonLabel, subtitle, color, navigation, type)}
+                {this.handleCard(title, buttonLabel, subtitle, color, navigation, type, screen)}
                 <View style = {styles.container}>
                     {this.handleCardButton(title, buttonLabel, color, navigation, type)}
                 </View>

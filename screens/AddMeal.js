@@ -50,6 +50,7 @@ class AddActivity extends Component {
         tx.executeSql('select * from meal',[],(tx,results)=>(console.log('db',results)));
       })
       // console.log('added db 3')
+      this.props.navigation.navigate('Meal')
   }
 
   getData = (content, label) => {

@@ -101,7 +101,7 @@ class ListAct extends Component {
                         ) 
                         : console.log('no items'))
                         : (this.state.items != null 
-                            ? this.state.items.slice(0,3).map(({id, mealname, fats, proteins, calories, date})=>
+                            ? this.state.items.slice(this.state.items.length-3,this.state.items.length).map(({id, mealname, fats, proteins, calories, date})=>
                                 <ListItem
                                     style={{
                                         backgroundColor: '#1c9963',

@@ -18,9 +18,9 @@ class Activity extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.cardQuote}>You are what you eat.</Text>
-                    <Card navigation={navigation} type={'sum'} title={'Summary'} buttonLabel={''} subtitle={''} color={''}/>
-                    <Card navigation={navigation} type={'chart'} title={'Nutrient Chart'} buttonLabel={'DETAILS'} subtitle={''} color={'#82C5E6'}/>
-                    <Card navigation={navigation} type={'list'} title={'Meals'} buttonLabel={'ADD MEAL'} subtitle={''} color={'#82C5E6'}/>
+                    <Card navigation={navigation} type={'sum'} title={'Summary'} buttonLabel={''} subtitle={''} color={''} screen={'meal'}/>
+                    <Card navigation={navigation} type={'chart'} title={'Nutrient Chart'} buttonLabel={'DETAILS'} subtitle={''} color={'#82C5E6'}  screen={'meal'}/>
+                    <Card navigation={navigation} type={'list'} title={'Meals'} buttonLabel={'ADD MEAL'} subtitle={''} color={'#82C5E6'} screen={'meal'}/>
                 </View>
             </ScrollView>
         );
