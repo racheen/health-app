@@ -47,9 +47,10 @@ class ListAct extends Component {
             case 'activity': 
             return (
                 <View style={styles.listContainer}>
+                    {/* {this.getData(type)} */}
                     {full ? 
                         (this.state.items != null 
-                        ? this.state.items.map(({id, fitnessact, duration, distance, calories, date})=>
+                        ? this.state.items.reverse().map(({id, fitnessact, duration, distance, calories, date})=>
                             <ListItem
                                 style={{
                                     backgroundColor: '#1c9963',
@@ -64,7 +65,7 @@ class ListAct extends Component {
                         ) 
                         : console.log('no items'))
                         : (this.state.items != null 
-                            ? this.state.items.slice(0,3).map(({id, fitnessact, duration, distance, calories, date})=>
+                            ? this.state.items.reverse().slice(0,3).map(({id, fitnessact, duration, distance, calories, date})=>
                                 <ListItem
                                     style={{
                                         backgroundColor: '#1c9963',
@@ -84,9 +85,10 @@ class ListAct extends Component {
             default: 
             return (
                 <View style={styles.listContainer}>
+                {/* {this.getData(type)} */}
                     {full ? 
                         (this.state.items != null 
-                        ? this.state.items.map(({id, mealname, fats, proteins, calories, date})=>
+                        ? this.state.items.reverse().map(({id, mealname, fats, proteins, calories, date})=>
                             <ListItem
                                 style={{
                                     backgroundColor: '#1c9963',
@@ -101,7 +103,7 @@ class ListAct extends Component {
                         ) 
                         : console.log('no items'))
                         : (this.state.items != null 
-                            ? this.state.items.slice(this.state.items.length-3,this.state.items.length).map(({id, mealname, fats, proteins, calories, date})=>
+                            ? this.state.items.reverse().slice(0,3).map(({id, mealname, fats, proteins, calories, date})=>
                                 <ListItem
                                     style={{
                                         backgroundColor: '#1c9963',

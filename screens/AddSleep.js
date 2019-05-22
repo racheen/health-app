@@ -23,7 +23,7 @@ class AddActivity extends Component {
 
   state = {
     sleep : {
-      duration: '8 hours',
+      duration: '8',
       date: "01/01/2019"
     }
   }

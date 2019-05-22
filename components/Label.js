@@ -163,9 +163,9 @@ class Label extends Component {
                         this.setModalVisible(true);
                         }}>
                         <View style={styles.label}>
-                        <Text style={{flex:4}}>{label}</Text>
-                        <Text style={{flex:1, marginRight: 0}}>{this.state.content}</Text>
-                        <Ionicons style={{marginRight: 0}} name={'ios-arrow-forward'} size={18} color={'gray'} />
+                          <Text style={{flex:4}}>{label}</Text>
+                          <Text style={{flex:1, marginRight: 0}}>{this.state.content}</Text>
+                          <Ionicons style={{marginRight: 0}} name={'ios-arrow-forward'} size={18} color={'gray'} />
                         </View>
                     </TouchableHighlight>
                     <View>
