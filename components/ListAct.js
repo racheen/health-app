@@ -12,16 +12,15 @@ class ListAct extends Component {
     getData = (type) => {
         if (type=='activity'){
             db.transaction(tx => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)');
                 tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('SELECT * FROM meal',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         }
-        console.log('results', this.state)
     }
     
     componentDidMount() {
@@ -40,14 +39,20 @@ class ListAct extends Component {
     }
 
     render() {
-        const {color, full} = this.props
-        console.log('results', this.state)
+        const {color, full, added} = this.props
+        // console.log('data', added)
+        if (added !== undefined){
+            // console.log(this.state.items !== added)
+            if (this.state.items !== added) {
+                this.getData(type)
+                // console.log('data', this.state.items)
+            }
+        }
         const type = this.state.type
         switch (type) {
             case 'activity': 
             return (
                 <View style={styles.listContainer}>
-                    {/* {this.getData(type)} */}
                     {full ? 
                         (this.state.items != null 
                         ? this.state.items.reverse().map(({id, fitnessact, duration, distance, calories, date})=>
@@ -63,7 +68,7 @@ class ListAct extends Component {
                                 content={{fitnessact, duration, distance, calories, date}}
                                 type= {type}/>
                         ) 
-                        : console.log('no items'))
+                        : null)
                         : (this.state.items != null 
                             ? this.state.items.reverse().slice(0,3).map(({id, fitnessact, duration, distance, calories, date})=>
                                 <ListItem
@@ -78,7 +83,7 @@ class ListAct extends Component {
                                     content={{fitnessact, duration, distance, calories, date}}
                                     type= {type}/>
                             ) 
-                            : console.log('no items'))
+                            : null)
                     }
                 </View>
             );
@@ -101,7 +106,7 @@ class ListAct extends Component {
                                 content={{mealname, fats, proteins, calories, date}}
                                 type= {type}/>
                         ) 
-                        : console.log('no items'))
+                        : null)
                         : (this.state.items != null 
                             ? this.state.items.reverse().slice(0,3).map(({id, mealname, fats, proteins, calories, date})=>
                                 <ListItem

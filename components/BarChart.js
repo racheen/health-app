@@ -13,39 +13,36 @@ class BarChartExample extends React.PureComponent {
         if (screen=='activity'){
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS pedometer',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, date text, steps text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, date text, steps text)');
                 tx.executeSql('select * from pedometer',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (screen=='meal') {
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('select * from meal',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS sleep',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)');
                 tx.executeSql('select * from sleep',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } 
     }
     componentDidMount(){
         const {screen} = this.props
-        console.log('screen', screen)
         this.getData(screen)
     }
 
     render() {
         const {color, screen} = this.props
-        // console.log('color', color)
-        console.log(this.state.items)
         let data = []
         let fill = color
         if (screen=='activity'){
             this.state.items !== null 
                 ? data = this.state.items.reverse().slice(0,7) 
-                : console.log('state is null')
+                : null
             const colors = [ color ]
             const keys   = [ 'steps' ]
             return (
@@ -61,7 +58,7 @@ class BarChartExample extends React.PureComponent {
         } else if (screen=='meal') {
             this.state.items !== null 
                 ? data = this.state.items.reverse().slice(0,7)
-                : console.log('state is null')
+                : null
             const colors = [ color, '#1263AD', '#5BE500' ]
             const keys   = [ 'fats', 'proteins', 'calories' ]
             return (
@@ -77,7 +74,7 @@ class BarChartExample extends React.PureComponent {
         } else {          
             this.state.items !== null 
                 ? data = this.state.items.reverse().slice(0,7) 
-                : console.log('state is null')
+                : null
             const colors = [ color ]
             const keys   = [ 'duration' ]
             return (

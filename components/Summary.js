@@ -13,20 +13,19 @@ class Summary extends Component {
         if (screen=='activity'){
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)')
                 tx.executeSql('select * from activity',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)',[],(_,results)=>console.log('add table'));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('select * from meal',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } 
     }
     componentDidMount(){
         const {screen} = this.props
-        console.log('screen', screen)
         this.getData(screen)
     }
 
@@ -38,15 +37,11 @@ class Summary extends Component {
 
     render() {
         const {screen} = this.props
-        // console.log('screen', screen)
-        // this.getData(screen)
-        console.log('state', this.state.items)
-        // console.log('total duration', duration) 
         if (screen === 'activity'){
             var duration, distance, calories = 0
-            this.state.items !== null ? duration = this.summation(this.state.items, "duration") : console.log('items is null')
-            this.state.items !== null ? distance = this.summation(this.state.items, "distance") : console.log('items is null')
-            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : console.log('items is null')    
+            this.state.items !== null ? duration = this.summation(this.state.items, "duration") : null
+            this.state.items !== null ? distance = this.summation(this.state.items, "distance") : null
+            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : null  
             return (
                 <View style={{paddingBottom:10, paddingTop:10}}>
                     <SummaryContainer distance={distance} duration={duration} calories={calories} screen={screen}/>

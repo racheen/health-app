@@ -4,7 +4,7 @@ import styles from '../Styles.js'
 import CardItem from './CardItem.js'
 
 class Card extends Component {
-    handleCard(title, buttonLabel, subtitle, color, navigation, type, screen) {
+    handleCard(title, buttonLabel, subtitle, color, navigation, type, screen, added) {
         switch(type) {
             case 'form':
                 return  (
@@ -32,7 +32,7 @@ class Card extends Component {
                     <TouchableOpacity onPress={() => navigation.navigate(title.replace(/\s+/, ""), {color:color, title:title})}> 
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
-                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen}/>
+                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen} added={added}/>
                     </TouchableOpacity>)
         }
     }
@@ -63,10 +63,10 @@ class Card extends Component {
 
     render() {
         const handlePress = () => false
-        const {navigation, title, subtitle, buttonLabel, data, color, type, screen} = this.props
+        const {navigation, title, subtitle, buttonLabel, data, color, type, screen, added} = this.props
         return (
             <View style={[styles.box]}>
-                {this.handleCard(title, buttonLabel, subtitle, color, navigation, type, screen)}
+                {this.handleCard(title, buttonLabel, subtitle, color, navigation, type, screen, added)}
                 <View style = {styles.container}>
                     {this.handleCardButton(title, buttonLabel, color, navigation, type)}
                 </View>
