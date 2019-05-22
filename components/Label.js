@@ -158,16 +158,16 @@ class Label extends Component {
             default:
                 return(
                     <View>
-                    <View style={styles.label}>
-                    <Text style={{flex:4}}>{label}</Text>
-                    <Text style={{flex:1, marginRight: 0}}>{this.state.content}</Text>
                     <TouchableHighlight
                         onPress={() => {
                         this.setModalVisible(true);
                         }}>
+                        <View style={styles.label}>
+                        <Text style={{flex:4}}>{label}</Text>
+                        <Text style={{flex:1, marginRight: 0}}>{this.state.content}</Text>
                         <Ionicons style={{marginRight: 0}} name={'ios-arrow-forward'} size={18} color={'gray'} />
+                        </View>
                     </TouchableHighlight>
-                    </View>
                     <View>
                     <Modal
                         animationType="slide"
