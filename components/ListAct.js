@@ -193,11 +193,11 @@ class ListItem extends Component {
             return (
                 <View style={[styles.listItem, {backgroundColor:color}]}>
                     <View style={styles.div1}>
-                        <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                        <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end', fontFamily:'ReemKufi'}]}>
                             {content.date}
                         </Text>
                     </View>
-                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end', fontFamily:'ReemKufi'}]}>
                         {content.steps} Steps
                     </Text>
                 </View>
@@ -205,7 +205,7 @@ class ListItem extends Component {
             case 'meal': 
             return (
                 <View style={[styles.listItem, {backgroundColor:color}]}>
-                    <View style={styles.div1}>
+                    <View style={[styles.div1, {fontFamily:'ReemKufi'}]}>
                         <Text style={styles.title}>
                             {content.mealname}
                         </Text>
@@ -215,7 +215,7 @@ class ListItem extends Component {
                             <Text style={styles.content}>{content.proteins}</Text>
                         </View>
                     </View>
-                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end',fontFamily:'ReemKufi'}]}>
                         {content.calories}
                     </Text>
                 </View>
@@ -224,11 +224,11 @@ class ListItem extends Component {
             return (
                 <View style={[styles.listItem, {backgroundColor:color}]}>
                     <View style={styles.div1}>
-                        <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                        <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end',fontFamily:'ReemKufi'}]}>
                             {content.date}
                         </Text>
                     </View>
-                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end',fontFamily:'ReemKufi'}]}>
                         {content.duration} hours
                     </Text>
                 </View>
@@ -255,22 +255,26 @@ const styles = StyleSheet.create({
         flex:1,
         height: 30,
         // borderWidth: 1
+        // fontFamily:'ReemKufi',
     },
     title: {
         flex: 1,
         height: 15,
         // borderWidth: 1
+        fontFamily:'ReemKufi'
     },
     contents: {
         flex: 1,
         // height: 15,
         // borderWidth: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        fontFamily:'ReemKufi'
     },
     content: {
         flex: 1,
         height: 15,
+        fontFamily:'ReemKufi'
         // padding: 5,
         // borderWidth: 1
     },

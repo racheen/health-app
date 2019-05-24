@@ -47,12 +47,12 @@ class BarChartExample extends React.PureComponent {
             const keys   = [ 'steps' ]
             return (
                 <StackedBarChart
-                    style={ { height: 200 } }
+                    style={ { height: 150 } }
                     keys={ keys }
                     colors={ colors }
                     data={ data }
                     showGrid={ false }
-                    contentInset={ { top: 30, bottom: 30 } }
+                    contentInset={ { top: 30, bottom: 30, left: 10, right: 10 } }
                 />
             )          
         } else if (screen=='meal') {
@@ -63,7 +63,7 @@ class BarChartExample extends React.PureComponent {
             const keys   = [ 'fats', 'proteins', 'calories' ]
             return (
                 <StackedBarChart
-                    style={ { height: 200 } }
+                    style={ { height: 150 } }
                     keys={ keys }
                     colors={ colors }
                     data={ data }
@@ -79,7 +79,7 @@ class BarChartExample extends React.PureComponent {
             const keys   = [ 'duration' ]
             return (
                 <StackedBarChart
-                    style={ { height: 200 } }
+                    style={ { height: 150 } }
                     keys={ keys }
                     colors={ colors }
                     data={ data }

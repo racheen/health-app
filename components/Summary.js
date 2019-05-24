@@ -7,7 +7,8 @@ const db = SQLite.openDatabase('db.db');
 class Summary extends Component {
     state = {
         items : null,
-        summary : null
+        summary : null,
+        items2: null
     }
     getData = (screen) => {
         if (screen=='activity'){
@@ -15,6 +16,8 @@ class Summary extends Component {
                 // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
                 tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)')
                 tx.executeSql('select * from activity',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
+                tx.executeSql('select * from pedometer',[],(tx,results)=>this.setState({items2:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
@@ -38,20 +41,21 @@ class Summary extends Component {
     render() {
         const {screen} = this.props
         if (screen === 'activity'){
-            var duration, distance, calories = 0
+            var duration, distance, calories, steps = 0
             this.state.items !== null ? duration = this.summation(this.state.items, "duration") : null
             this.state.items !== null ? distance = this.summation(this.state.items, "distance") : null
-            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : null  
+            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : null 
+            this.state.items2 !== null ? steps = this.summation(this.state.items2, "steps") : null 
             return (
                 <View style={{paddingBottom:10, paddingTop:10}}>
-                    <SummaryContainer distance={distance} duration={duration} calories={calories} screen={screen}/>
+                    <SummaryContainer distance={distance} duration={duration} calories={calories} steps={steps} screen={screen}/>
                 </View>
             );
         }else{
             var fats, proteins, calories = 0
             this.state.items !== null ? fats = this.summation(this.state.items, "fats") : console.log('items is null')
             this.state.items !== null ? proteins = this.summation(this.state.items, "proteins") : console.log('items is null')
-            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : console.log('items is null')    
+            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : console.log('items is null')   
             return(
                 <View style={{paddingBottom:10, paddingTop:10}}>
                     <SummaryContainer fats={fats} proteins={proteins} calories={calories} screen={screen}/>
@@ -65,12 +69,13 @@ class SummaryContainer extends Component {
     render() {
         const {screen} = this.props
         if (screen === 'activity'){
-            const {distance, duration, calories} = this.props
+            const {distance, duration, calories, steps} = this.props
             return (
                 <View style={styles.summaryContainer}>
                     <SummaryItem title={'DISTANCE'} content={distance}/>
                     <SummaryItem title={'DURATION'} content={duration}/>
                     <SummaryItem title={'CALORIES'} content={calories}/>
+                    <SummaryItem title={'STEPS'} content={steps}/>
                 </View>
             );
         }else{
@@ -91,8 +96,8 @@ class SummaryItem extends Component {
         const {title, content} = this.props
         return (
                 <View style={styles.summaryItem}>
-                    <Text style={styles.label}>{title}</Text>
-                    <Text style={styles.info}>{content}</Text>
+                    <Text style={{fontFamily:'ReemKufi'}}>{title}</Text>
+                    <Text style={{fontFamily:'ReemKufi'}}>{content}</Text>
                 </View>
         );
     }
@@ -119,7 +124,13 @@ const styles = StyleSheet.create({
         // flexDirection: 'row',
         // borderWidth: 1
         margin: 5
-    }
+    },
+    // label: {
+    //     fontFamily:'ReemKufi'
+    // },
+    // info: {
+    //     fontFamily:'ReemKufi'
+    // }
 });
 
 export default Summary

@@ -18,11 +18,11 @@ class Home extends Component {
         flexDirection: 'row',
         flexWrap: 'wrap'
     }}>
-        <PedometerSensor/>
         <Menu navigation={navigation} type={'chart'} title={'Activity'} color={'#FF4D3C'}/>
         <Menu navigation={navigation} type={'chart'} title={'Meal'} color={'#82C5E6'}/>
         <Menu navigation={navigation} type={'chart'} title={'Sleep'} color={'#096B91'}/>
         <Menu navigation={navigation} type={'quote'} title={'Mindfulness'} color={'#79C8A6'}/>
+        <PedometerSensor/>
       </View>
     </ScrollView>
     )

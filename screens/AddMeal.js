@@ -36,20 +36,12 @@ class AddActivity extends Component {
   }
 
   sqlAdd = () => {
-      // console.log('hello')
-      // console.log('state from nav', this.state.meal)
       var meal = this.state.meal
       db.transaction(tx => {
-        // tx.executeSql('DROP TABLE IF EXISTS meal',[],(_,results)=>console.log('drop table'));
         tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)',[],(_,results)=>console.log('add table'));
-        // tx.executeSql('select * from meal',[],(tx,results)=>(console.log('db',results)));
-        // tx.executeSql('select * from meal',[],(tx,results)=>(
-        //   results.rows.length === 0 ? tx.executeSql('INSERT INTO meal (fintnessact, duration, distance, calories, date) VALUES (?,?,?,?,?)',[null,null,null,null,null],(_,{rows})=>console.log('add succesfully')) : this.setState({meal:results.rows.item(0)})
-        // ));
         tx.executeSql('INSERT INTO meal (mealname, fats, proteins, calories, date) VALUES (?,?,?,?,?)',[meal.mealname,meal.fats,meal.proteins,meal.calories,meal.date],(_,{rows})=>console.log('add succesfully'));
         tx.executeSql('select * from meal',[],(tx,results)=>(console.log('db',results)));
       })
-      // console.log('added db 3')
       this.props.navigation.navigate('Meal')
   }
 

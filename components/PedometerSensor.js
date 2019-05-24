@@ -2,7 +2,6 @@ import Expo from "expo";
 import React from "react";
 import { Pedometer, SQLite } from "expo";
 import { StyleSheet, Text, View } from "react-native";
-import styles from '../Styles.js'
 
 const db = SQLite.openDatabase('db.db');
 
@@ -81,17 +80,40 @@ export default class PedometerSensor extends React.Component {
   render() {
     return (
       <View style={styles.box}>
-        <Text>
+        {/* <Text>
           Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}
         </Text>
         <Text>
           Steps taken in the last 24 hours: {this.state.pastStepCount}
         </Text>
-        <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
+        <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text> */}
+        <Text style={{fontFamily:'ReemKufi',fontSize:20}}>Steps taken for today: {this.state.pastStepCount + this.state.currentStepCount}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  box:{
+      height: 154,
+      // width: 380,
+      paddingLeft: 75,
+      paddingRight: 75,
+      margin: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 20,
+      backgroundColor: '#FFFFFF',
+      borderWidth: 1,
+      borderColor: '#ddd',
+      borderBottomWidth: 0,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+      elevation: 10,
+  }
+});
 
 
 // Expo.registerRootComponent(PedometerSensor);

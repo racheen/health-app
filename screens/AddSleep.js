@@ -33,20 +33,12 @@ class AddActivity extends Component {
   }
 
   sqlAdd = () => {
-      // console.log('hello')
-      // console.log('state from nav', this.state.sleep)
       var sleep = this.state.sleep
       db.transaction(tx => {
-        // tx.executeSql('DROP TABLE IF EXISTS sleep',[],(_,results)=>console.log('drop table'));
         tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)',[],(_,results)=>console.log('add table'));
-        // tx.executeSql('select * from sleep',[],(tx,results)=>(console.log('db',results)));
-        // tx.executeSql('select * from sleep',[],(tx,results)=>(
-        //   results.rows.length === 0 ? tx.executeSql('INSERT INTO sleep (fintnessact, duration, distance, calories, date) VALUES (?,?,?,?,?)',[null,null,null,null,null],(_,{rows})=>console.log('add succesfully')) : this.setState({sleep:results.rows.item(0)})
-        // ));
         tx.executeSql('INSERT INTO sleep (date, duration) VALUES (?,?)',[sleep.date ,sleep.duration],(_,{rows})=>console.log('add succesfully'));
         tx.executeSql('select * from sleep',[],(tx,results)=>(console.log('db',results)));
       })
-      // console.log('added db 3')
       this.props.navigation.navigate('Sleep')
   }
 
@@ -63,7 +55,6 @@ class AddActivity extends Component {
   }
 
   render() {
-    console.log('state', this.state.sleep)
     return (
       <View style={{ flex: 1, marginLeft: 10, marginRight: 10 }}>
         <Label label={'Date'} updateStateParent={this.getData} type={'add'}/>

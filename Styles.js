@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -10,17 +11,27 @@ export default StyleSheet.create({
     box: {
         // height: 210,
         width: 380,
-        backgroundColor: '#F9F9F9',
+        backgroundColor: '#FFFFFF',
         marginTop: 10,
         marginLeft: 5,
         marginRight: 5,
-        borderRadius: 5,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 5,
+        marginBottom: 10,
     },
     cardLabel: {
         fontSize:20, 
         marginTop:12,
         marginBottom:8,
-        marginLeft:18
+        marginLeft:18,
+        fontFamily:'ReemKufi'
     },
     divider: {
         borderBottomColor: '#BDBDBD',
@@ -43,7 +54,8 @@ export default StyleSheet.create({
         paddingTop: 3,
         paddingBottom: 3,
         borderRadius: 10,
-        backgroundColor: '#F0F0F0'
+        backgroundColor: '#F0F0F0',
+        fontFamily:'ReemKufi'
     },
     cardQuote: {
         fontSize: 25,
@@ -53,7 +65,23 @@ export default StyleSheet.create({
         paddingTop: 25,
         paddingLeft: 30,
         paddingRight: 30,
-        paddingBottom: 10
+        paddingBottom: 10,
+        width: 380,
+        backgroundColor: '#FFFFFF',
+        marginTop: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginBottom: 10,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderBottomWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 5,
+        fontFamily: 'ReemKufi'
     },
     category:{
         // flex: 1,
