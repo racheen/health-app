@@ -10,8 +10,6 @@ class Menu extends Component {
                 <Text>{title}</Text>
                 </View>
             </TouchableOpacity>
-            
-               
         );
     }
 }

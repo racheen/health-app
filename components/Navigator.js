@@ -122,6 +122,9 @@ const Titlebar = createAppContainer(
     },
     NutrientChart: {
       screen: Details,
+    },
+    SleepDetails: {
+      screen: Details,
     }
   })
 );

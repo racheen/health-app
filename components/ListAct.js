@@ -15,18 +15,30 @@ class ListAct extends Component {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)');
                 tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
-        } else {
+        } else if (type=='meal'){
             db.transaction(tx => {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('SELECT * FROM meal',[],(tx,results)=>this.setState({items:results.rows._array}));
+            })
+        } else if (type=='pedometer'){
+            db.transaction(tx => {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
+                tx.executeSql('SELECT * FROM pedometer',[],(tx,results)=>this.setState({items:results.rows._array}));
+            })
+        }  else {
+            db.transaction(tx => {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)');
+                tx.executeSql('SELECT * FROM sleep',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         }
     }
     
     componentDidMount() {
-        const {color} = this.props
+        const {color, title} = this.props
         if (color==='#FF4D3C') {
-            type="activity"
+            console.log(title)
+            if (title==='Pedometer') {type="pedometer"}
+            else {type="activity"}
         } else if (color==='#82C5E6'){
             type="meal"
         } else if (color==='#096B91'){
@@ -38,31 +50,22 @@ class ListAct extends Component {
         this.getData(type)
     }
 
+    hello = (added) => {
+        this.setState({ items: [] })
+    }
+
     render() {
         const {color, full, added} = this.props
-        // console.log('data', added)
-        if (added !== undefined){
-            // console.log(this.state.items !== added)
-            if (this.state.items !== added) {
-                this.getData(type)
-                // console.log('data', this.state.items)
-            }
-        }
         const type = this.state.type
         switch (type) {
             case 'activity': 
             return (
                 <View style={styles.listContainer}>
+                    {(added !== []) ? this.getData(type) : null }
                     {full ? 
                         (this.state.items != null 
                         ? this.state.items.reverse().map(({id, fitnessact, duration, distance, calories, date})=>
                             <ListItem
-                                style={{
-                                    backgroundColor: '#1c9963',
-                                    borderColor: '#000',
-                                    borderWidth: 1,
-                                    padding: 8
-                                }}
                                 key = {id}
                                 color={color} 
                                 content={{fitnessact, duration, distance, calories, date}}
@@ -72,12 +75,6 @@ class ListAct extends Component {
                         : (this.state.items != null 
                             ? this.state.items.reverse().slice(0,3).map(({id, fitnessact, duration, distance, calories, date})=>
                                 <ListItem
-                                    style={{
-                                        backgroundColor: '#1c9963',
-                                        borderColor: '#000',
-                                        borderWidth: 1,
-                                        padding: 8
-                                    }}
                                     key = {id}
                                     color={color} 
                                     content={{fitnessact, duration, distance, calories, date}}
@@ -87,20 +84,40 @@ class ListAct extends Component {
                     }
                 </View>
             );
-            default: 
+            case 'pedometer': 
             return (
                 <View style={styles.listContainer}>
-                {/* {this.getData(type)} */}
+                    {(added !== []) ? this.getData(type) : null }
+                    {full ? 
+                        (this.state.items != null 
+                        ? this.state.items.reverse().map(({id, steps, date})=>
+                            <ListItem
+                                key = {id}
+                                color={color} 
+                                content={{steps, date}}
+                                type= {type}/>
+                        ) 
+                        : null)
+                        : (this.state.items != null 
+                            ? this.state.items.reverse().slice(0,3).map(({id, fitnessact, duration, distance, calories, date})=>
+                                <ListItem
+                                    key = {id}
+                                    color={color} 
+                                    content={{fitnessact, duration, distance, calories, date}}
+                                    type= {type}/>
+                            ) 
+                            : null)
+                    }
+                </View>
+            );
+            case 'meal': 
+            return (
+                <View style={styles.listContainer}>
+                    {(added !== []) ? this.getData(type) : null }
                     {full ? 
                         (this.state.items != null 
                         ? this.state.items.reverse().map(({id, mealname, fats, proteins, calories, date})=>
                             <ListItem
-                                style={{
-                                    backgroundColor: '#1c9963',
-                                    borderColor: '#000',
-                                    borderWidth: 1,
-                                    padding: 8
-                                }}
                                 key = {id}
                                 color={color} 
                                 content={{mealname, fats, proteins, calories, date}}
@@ -110,15 +127,34 @@ class ListAct extends Component {
                         : (this.state.items != null 
                             ? this.state.items.reverse().slice(0,3).map(({id, mealname, fats, proteins, calories, date})=>
                                 <ListItem
-                                    style={{
-                                        backgroundColor: '#1c9963',
-                                        borderColor: '#000',
-                                        borderWidth: 1,
-                                        padding: 8
-                                    }}
                                     key = {id}
                                     color={color} 
                                     content={{mealname, fats, proteins, calories, date}}
+                                    type= {type}/>
+                            ) 
+                            : console.log('no items'))
+                    }
+                </View>
+            );
+            default: 
+            return (
+                <View style={styles.listContainer}>
+                    {full ? 
+                        (this.state.items != null 
+                        ? this.state.items.reverse().map(({id, duration, date})=>
+                            <ListItem
+                                key = {id}
+                                color={color} 
+                                content={{duration, date}}
+                                type= {type}/>
+                        ) 
+                        : null)
+                        : (this.state.items != null 
+                            ? this.state.items.reverse().slice(0,3).map(({id, duration, date})=>
+                                <ListItem
+                                    key = {id}
+                                    color={color} 
+                                    content={{duration, date}}
                                     type= {type}/>
                             ) 
                             : console.log('no items'))
@@ -153,7 +189,20 @@ class ListItem extends Component {
                     </Text>
                 </View>
             );
-            default: 
+            case 'pedometer': 
+            return (
+                <View style={[styles.listItem, {backgroundColor:color}]}>
+                    <View style={styles.div1}>
+                        <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                            {content.date}
+                        </Text>
+                    </View>
+                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                        {content.steps} Steps
+                    </Text>
+                </View>
+            );
+            case 'meal': 
             return (
                 <View style={[styles.listItem, {backgroundColor:color}]}>
                     <View style={styles.div1}>
@@ -168,6 +217,19 @@ class ListItem extends Component {
                     </View>
                     <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
                         {content.calories}
+                    </Text>
+                </View>
+            );
+            default: 
+            return (
+                <View style={[styles.listItem, {backgroundColor:color}]}>
+                    <View style={styles.div1}>
+                        <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                            {content.date}
+                        </Text>
+                    </View>
+                    <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end'}]}>
+                        {content.duration} hours
                     </Text>
                 </View>
             );

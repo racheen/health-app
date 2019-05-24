@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, Button, TouchableOpacity } from 'react-native'
 import Menu from '../components/Menu.js'
 import styles from '../Styles.js'
+import PedometerSensor from '../components/PedometerSensor.js';
 
 class Home extends Component {
     
@@ -17,6 +18,7 @@ class Home extends Component {
         flexDirection: 'row',
         flexWrap: 'wrap'
     }}>
+        <PedometerSensor/>
         <Menu navigation={navigation} type={'chart'} title={'Activity'} color={'#FF4D3C'}/>
         <Menu navigation={navigation} type={'chart'} title={'Meal'} color={'#82C5E6'}/>
         <Menu navigation={navigation} type={'chart'} title={'Sleep'} color={'#096B91'}/>

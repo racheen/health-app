@@ -18,7 +18,7 @@ class Activity extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.cardQuote}>Avoid strenours mental activity before bed.</Text>
-                    <View style={styles.category}>
+                    {/* <View style={styles.category}>
                         <View style={styles.categoryDay}>
                             <Text>Day</Text>
                         </View>
@@ -31,8 +31,8 @@ class Activity extends React.Component {
                         <View style={styles.categoryYear}>
                             <Text>Year</Text>
                         </View>
-                    </View>
-                    <Card navigation={navigation} type={'chart'} title={'Sleep'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''} screen={'sleep'}/>
+                    </View> */}
+                    <Card navigation={navigation} type={'chart'} title={'Sleep Details'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''} screen={'sleep'}/>
                 </View>
             </ScrollView>
         );

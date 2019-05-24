@@ -52,18 +52,21 @@ class Card extends Component {
                     </TouchableOpacity>
                 )
             default:
+                if (title==='Pedometer'){return (null)}
+                else if (title==='Nutrient Chart') {return(null)}
+                else {
                 return (
                 <TouchableOpacity onPress={() => navigation.navigate(buttonLabel.replace(/\s+/, ""))} style={{paddingBottom:10, paddingTop:10}}>
                     <Text style = {[styles.button, {color}]}>
                         {buttonLabel}
                     </Text>
-                </TouchableOpacity>)
+                </TouchableOpacity>)}
         }
     }
 
     render() {
         const handlePress = () => false
-        const {navigation, title, subtitle, buttonLabel, data, color, type, screen, added} = this.props
+        const {navigation, title, subtitle, buttonLabel, color, type, screen, added} = this.props
         return (
             <View style={[styles.box]}>
                 {this.handleCard(title, buttonLabel, subtitle, color, navigation, type, screen, added)}

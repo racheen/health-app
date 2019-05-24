@@ -16,10 +16,11 @@ class Details extends Component {
     render() {
         const {navigation} = this.props
         const {color} = navigation.state.params
+        const {title} = navigation.state.params
         return (
             <ScrollView>
                 <View style={[styles.container, {alignItems:'stretch', margin:10}]}>
-                    <ListAct color={color} full={true}></ListAct>
+                    <ListAct title={title} color={color} full={true}></ListAct>
                 </View>
             </ScrollView>
         );
