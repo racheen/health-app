@@ -14,19 +14,19 @@ class BarChartExample extends React.PureComponent {
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS pedometer',[],(_,results)=>console.log('drop table'));
                 tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, date text, steps text)');
-                tx.executeSql('select * from pedometer',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('select * from pedometer order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (screen=='meal') {
             db.transaction(tx => {
-                // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
+                // tx.executeSql('DROP TABLE IF EXISTS meal',[],(_,results)=>console.log('drop table'));
                 tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
-                tx.executeSql('select * from meal',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('select * from meal order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
                 // tx.executeSql('DROP TABLE IF EXISTS sleep',[],(_,results)=>console.log('drop table'));
                 tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)');
-                tx.executeSql('select * from sleep',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('select * from sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } 
     }
@@ -77,16 +77,27 @@ class BarChartExample extends React.PureComponent {
                 : null
             const colors = [ color ]
             const keys   = [ 'duration' ]
+            let data2 = []
+            data.map(({id, duration, date})=>{
+                console.log(duration.split(':')[0])
+                let obj = {}
+                obj['date'] = date
+                obj['id'] = id
+                obj['duration'] = duration.split(':')[0]
+                data2.push(obj)
+            })
+            console.log(data2)
             return (
                 <StackedBarChart
                     style={ { height: 150 } }
                     keys={ keys }
                     colors={ colors }
-                    data={ data }
+                    data={ data2 }
                     showGrid={ false }
                     contentInset={ { top: 30, bottom: 30 } }
                 />
             )
+            // return (null)
         }
         
     }

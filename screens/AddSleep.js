@@ -31,15 +31,35 @@ class AddActivity extends Component {
   componentDidMount() {
     this.props.navigation.setParams({ handleThis: this.sqlAdd });
   }
+  
+  addTime = (previousTime, newTime) => {
+    prev = previousTime.split(':')
+    newT = newTime.split(':')
 
+    hours = parseInt(prev[0]) + parseInt(newT[0])
+    minutes = parseInt(prev[1]) + parseInt(newT[1])
+    
+    if (minutes >= 60 ) {
+      hours = parseInt(hours) + 1
+      minutes = parseInt(minutes) - 60
+    }
+    return (`${(hours)}:${(minutes)}`)
+    
+  }
   sqlAdd = () => {
       var sleep = this.state.sleep
       db.transaction(tx => {
         tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)',[],(_,results)=>console.log('add table'));
-        tx.executeSql('INSERT INTO sleep (date, duration) VALUES (?,?)',[sleep.date ,sleep.duration],(_,{rows})=>console.log('add succesfully'));
-        tx.executeSql('select * from sleep',[],(tx,results)=>(console.log('db',results)));
+        // tx.executeSql('INSERT INTO sleep (date, duration) VALUES (?,?)',[sleep.date ,sleep.duration],(_,{rows})=>console.log('add succesfully'));
+        tx.executeSql('SELECT * FROM sleep where date=(?)',[sleep.date],(tx,results)=>(
+          results.rows.length === 0 
+          ? tx.executeSql('INSERT INTO sleep (date, duration) VALUES (?,?)',[sleep.date, sleep.duration]) 
+          : tx.executeSql('UPDATE sleep SET duration= ? WHERE date = ?',[this.addTime(results.rows._array[0].duration, sleep.duration), sleep.date])
+        ));
+        // tx.executeSql('SELECT * FROM sleep',[],(tx,results)=>this.setState({data:results.rows._array}));
+        tx.executeSql('SELECT * FROM sleep',[],(tx,results)=>this.props.navigation.navigate('Sleep',{added:results.rows._array}));
+        // tx.executeSql('SELECT * FROM sleep',[],(tx,results)=>console.log(results));
       })
-      this.props.navigation.navigate('Sleep')
   }
 
   getData = (content, label) => {

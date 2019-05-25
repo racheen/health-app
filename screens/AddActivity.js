@@ -36,24 +36,14 @@ class AddActivity extends Component {
   }
 
   sqlAdd = () => {
-      // console.log('hello')
-      // console.log('state from nav', this.state.activity)
       let activity = this.state.activity
       db.transaction(tx => {
         // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
         tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)');
-        // tx.executeSql('select * from activity',[],(tx,results)=>(console.log('db',results)));
-        // tx.executeSql('select * from activity',[],(tx,results)=>(
-        //   results.rows.length === 0 ? tx.executeSql('INSERT INTO activity (fintnessact, duration, distance, calories, date) VALUES (?,?,?,?,?)',[null,null,null,null,null],(_,{rows})=>console.log('add succesfully')) : this.setState({activity:results.rows.item(0)})
-        // ));
         tx.executeSql('INSERT INTO activity (fitnessact, duration, distance, calories, date) VALUES (?,?,?,?,?)',[activity.fitnessact,activity.duration,activity.distance,activity.calories,activity.date]);
         tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.setState({data:results.rows._array}));
         tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.props.navigation.navigate('Activity',{added:results.rows._array}));
       })
-      // console.log('data from add activity',this.state.data)
-      // let data = this.state.data
-      // console.log('data', data)
-      // this.props.navigation.navigate('Activity',{data:data})
   }
 
   getData = (content, label) => {

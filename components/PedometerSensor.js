@@ -15,16 +15,13 @@ export default class PedometerSensor extends React.Component {
   add(start, result) {
     date = start.toLocaleDateString()
     db.transaction(tx => {
-      // tx.executeSql('DROP TABLE IF EXISTS pedometer',[],(_,results)=>console.log('drop table'));
       tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
       tx.executeSql('SELECT * FROM pedometer where date=(?)',[date],(tx,results)=>(
           results.rows.length === 0 
-          ? tx.executeSql('INSERT INTO pedometer (steps, date) VALUES (?,?)',[result, date],(_,{rows})=>console.log('add succesfully')) 
-          : tx.executeSql('UPDATE pedometer SET steps= ? WHERE date = ?',[result, date],(_,{rows})=>console.log('updated succesfully'))
+          ? tx.executeSql('INSERT INTO pedometer (steps, date) VALUES (?,?)',[result, date]) 
+          : tx.executeSql('UPDATE pedometer SET steps= ? WHERE date = ?',[result, date])
         ));
-      // tx.executeSql('INSERT INTO pedometer (steps, date) VALUES (?,?)',[result, start]);
-      // tx.executeSql('SELECT * FROM pedometer where date=(?)',[date],(tx,results)=>console.log('successful1', results));
-      tx.executeSql('SELECT * FROM pedometer',[],(tx,results)=>console.log('successful', results));
+      tx.executeSql('SELECT * FROM pedometer');
     })
   }
 

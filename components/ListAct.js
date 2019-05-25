@@ -13,22 +13,22 @@ class ListAct extends Component {
         if (type=='activity'){
             db.transaction(tx => {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)');
-                tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('SELECT * FROM activity order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (type=='meal'){
             db.transaction(tx => {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
-                tx.executeSql('SELECT * FROM meal',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('SELECT * FROM meal order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (type=='pedometer'){
             db.transaction(tx => {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
-                tx.executeSql('SELECT * FROM pedometer',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('SELECT * FROM pedometer order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         }  else {
             db.transaction(tx => {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)');
-                tx.executeSql('SELECT * FROM sleep',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('SELECT * FROM sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         }
     }
@@ -55,6 +55,7 @@ class ListAct extends Component {
     }
 
     render() {
+        // console.log(this.state.items)
         const {color, full, added} = this.props
         const type = this.state.type
         switch (type) {
@@ -139,6 +140,7 @@ class ListAct extends Component {
             default: 
             return (
                 <View style={styles.listContainer}>
+                    {(added !== []) ? this.getData(type) : null }
                     {full ? 
                         (this.state.items != null 
                         ? this.state.items.reverse().map(({id, duration, date})=>
@@ -229,7 +231,7 @@ class ListItem extends Component {
                         </Text>
                     </View>
                     <Text style={[styles.div1,{flexDirection:'row',justifyContent:'flex-end',fontSize:25, alignContent:'flex-end',fontFamily:'ReemKufi'}]}>
-                        {content.duration} hours
+                        {content.duration}
                     </Text>
                 </View>
             );
