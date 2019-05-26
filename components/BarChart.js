@@ -12,24 +12,19 @@ class BarChartExample extends React.PureComponent {
     getData = (screen) => {
         if (screen=='activity'){
             db.transaction(tx => {
-                // tx.executeSql('DROP TABLE IF EXISTS pedometer',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, date text, steps text)');
                 tx.executeSql('select * from pedometer order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (screen=='meal') {
             db.transaction(tx => {
-                // tx.executeSql('DROP TABLE IF EXISTS meal',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('select * from meal order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
-                // tx.executeSql('DROP TABLE IF EXISTS sleep',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)');
-                tx.executeSql('select * from sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
+                stx.executeSql('select * from sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } 
     }
+
     componentDidMount(){
         const {screen} = this.props
         this.getData(screen)

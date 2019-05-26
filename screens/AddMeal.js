@@ -39,9 +39,7 @@ class AddActivity extends Component {
       console.log('state', this.state.meal)
       var meal = this.state.meal
       db.transaction(tx => {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)',[],(_,results)=>console.log('add table'));
         tx.executeSql('INSERT INTO meal (mealname, fats, proteins, calories, date) VALUES (?,?,?,?,?)',[meal.mealname,meal.fats,meal.proteins,meal.calories,meal.date],(_,{rows})=>console.log('add succesfully'));
-        // tx.executeSql('select * from meal',[],(tx,results)=>(console.log('db',results)));
         tx.executeSql('SELECT * FROM meal',[],(tx,results)=>this.setState({data:results.rows._array}));
         tx.executeSql('SELECT * FROM meal',[],(tx,results)=>this.props.navigation.navigate('Meal',{added:results.rows._array}));
       })

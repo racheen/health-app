@@ -427,9 +427,14 @@ class Label extends Component {
                         style={styles.inputBox}
                         onChangeText={(content) => this.setState({content})}
                         onSubmitEditing={()=>{
-                          this.setContent(this.state.content, label);
-                          this.update(this.state.content,label);
-                          this.updateData();
+                          if (label=='Name'){
+                            this.setContent(this.state.content, label);
+                            this.update(this.state.content,label);
+                            this.updateData();
+                          } else {
+                            this.setContent(this.state.content, label);
+                            this.updateState(this.state.content, label);
+                          }
                         }}
                         placeholder={label}
                         value = {this.state.content}
@@ -449,9 +454,14 @@ class Label extends Component {
                         <Text style={{fontFamily:'ReemKufi', color:'#2391ff', fontSize: 15}}>Cancel</Text>
                       </TouchableHighlight>
                       <TouchableHighlight onPress={() => {
-                        this.setContent(this.state.content, label);
-                        this.update(this.state.content,label);
-                        this.updateData();
+                        if (label=='Name'){
+                          this.setContent(this.state.content, label);
+                          this.update(this.state.content,label);
+                          this.updateData();
+                        } else {
+                          this.setContent(this.state.content, label);
+                          this.updateState(this.state.content, label);
+                        }
                         }} 
                         style={{paddingRight:20}}>
                         <Text style={{fontFamily:'ReemKufi', color:'#2391ff', fontSize: 15}}> OK </Text>

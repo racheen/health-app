@@ -13,16 +13,11 @@ class Summary extends Component {
     getData = (screen) => {
         if (screen=='activity'){
             db.transaction(tx => {
-                // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)')
                 tx.executeSql('select * from activity',[],(tx,results)=>this.setState({items:results.rows._array}));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
                 tx.executeSql('select * from pedometer',[],(tx,results)=>this.setState({items2:results.rows._array}));
             })
         } else {
             db.transaction(tx => {
-                // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
-                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('select * from meal',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } 

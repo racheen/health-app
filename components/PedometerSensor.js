@@ -15,7 +15,6 @@ export default class PedometerSensor extends React.Component {
   add(start, result) {
     date = start.toLocaleDateString()
     db.transaction(tx => {
-      tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
       tx.executeSql('SELECT * FROM pedometer where date=(?)',[date],(tx,results)=>(
           results.rows.length === 0 
           ? tx.executeSql('INSERT INTO pedometer (steps, date) VALUES (?,?)',[result, date]) 

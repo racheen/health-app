@@ -12,22 +12,18 @@ class ListAct extends Component {
     getData = (type) => {
         if (type=='activity'){
             db.transaction(tx => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)');
                 tx.executeSql('SELECT * FROM activity order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (type=='meal'){
             db.transaction(tx => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS meal (id integer primary key not null, mealname text, fats text, proteins text, calories text, date text)');
                 tx.executeSql('SELECT * FROM meal order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } else if (type=='pedometer'){
             db.transaction(tx => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS pedometer (id integer primary key not null, steps text, date text)');
                 tx.executeSql('SELECT * FROM pedometer order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         }  else {
             db.transaction(tx => {
-                tx.executeSql('CREATE TABLE IF NOT EXISTS sleep (id integer primary key not null, date text, duration text)');
                 tx.executeSql('SELECT * FROM sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         }

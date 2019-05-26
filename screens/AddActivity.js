@@ -38,8 +38,6 @@ class AddActivity extends Component {
   sqlAdd = () => {
       let activity = this.state.activity
       db.transaction(tx => {
-        // tx.executeSql('DROP TABLE IF EXISTS activity',[],(_,results)=>console.log('drop table'));
-        tx.executeSql('CREATE TABLE IF NOT EXISTS activity (id integer primary key not null, fitnessact text, duration text, distance text, calories text, date text)');
         tx.executeSql('INSERT INTO activity (fitnessact, duration, distance, calories, date) VALUES (?,?,?,?,?)',[activity.fitnessact,activity.duration,activity.distance,activity.calories,activity.date]);
         tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.setState({data:results.rows._array}));
         tx.executeSql('SELECT * FROM activity',[],(tx,results)=>this.props.navigation.navigate('Activity',{added:results.rows._array}));
