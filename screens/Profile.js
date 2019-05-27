@@ -37,7 +37,7 @@ class Profile extends Component {
         <Label label={'Gender'} content={this.state.profile.gender} updateState={this.getData} type={'profile'}/>
         <Label label={'Date of Birth'} content={this.state.profile.dob} updateState={this.getData} type={'profile'}/>
         <Label label={'Height'} content={this.state.profile.height} updateState={this.getData} type={'profile'}/>
-        <Label label={'Weight'} content={this.state.profile.weight} updateState={this.getData} type={'profile'}/>
+        <Label label={'Weight'} content={this.state.profile.weight} updateState={this.getData} type={'profile'}/>s
       </View>
     );
   }

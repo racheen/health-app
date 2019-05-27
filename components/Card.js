@@ -11,14 +11,14 @@ class Card extends Component {
                     <View>
                         <Text style={[styles.cardLabel, {alignContent:'center'}]}>{title}</Text>
                         <View style={styles.divider}/>
-                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen}/>
+                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen} added={added}/>
                     </View>)
             case 'sum':
                 return  (
                     <View>
                         <Text style={styles.cardLabel}>{title}</Text>
                         <View style={styles.divider}/>
-                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen}/>
+                        <CardItem navigation={navigation} title={title} buttonLabel={buttonLabel} subtitle={subtitle} color={color} type={type} screen={screen} added={added}/>
                     </View>)
             case 'quote':
                 return  (

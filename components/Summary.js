@@ -34,7 +34,8 @@ class Summary extends Component {
     };
 
     render() {
-        const {screen} = this.props
+        const {screen, added} = this.props
+        (added !== []) ? this.getData(screen) : null 
         if (screen === 'activity'){
             var duration, distance, calories, steps = 0
             this.state.items !== null ? duration = this.summation(this.state.items, "duration") : null

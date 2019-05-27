@@ -31,9 +31,10 @@ class BarChartExample extends React.PureComponent {
     }
 
     render() {
-        const {color, screen} = this.props
+        const {color, screen, added} = this.props
         let data = []
         let fill = color
+        (added !== []) ? this.getData(screen) : null 
         if (screen=='activity'){
             this.state.items !== null 
                 ? data = this.state.items.reverse().slice(0,7) 

@@ -14,6 +14,7 @@ class Activity extends React.Component {
 
     render() {
         const {navigation} = this.props
+        const {added} = this.props.navigation.state.params
         return (
             <ScrollView>
                 <View style={styles.container}>
@@ -32,7 +33,7 @@ class Activity extends React.Component {
                             <Text>Year</Text>
                         </View>
                     </View> */}
-                    <Card navigation={navigation} type={'chart'} title={'Sleep Details'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''} screen={'sleep'}/>
+                    <Card navigation={navigation} type={'chart'} title={'Sleep Details'} buttonLabel={'ADD SLEEP'} subtitle={''} color={'#096B91'} category={''} screen={'sleep'} added={added}/>
                 </View>
             </ScrollView>
         );

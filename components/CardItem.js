@@ -10,13 +10,13 @@ class CardItem extends Component {
     handleCardItem(title, color, type, screen, added) {
         switch(type) {
             case 'form':
-                return <FormData title={title}/>
+                return <FormData title={title} added={added === undefined ? [] : added}/>
             case 'sum':
-                return <Summary screen={screen}/>
+                return <Summary screen={screen} added={added === undefined ? [] : added}/>
             case 'list':
                 return <ListAct color={color} full={false} added={added === undefined ? [] : added}/>
             default:
-                return <BarChartExample color={color} screen={screen}/>
+                return <BarChartExample color={color} screen={screen} added={added === undefined ? [] : added}/>
         }
 
     }
