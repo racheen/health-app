@@ -1,10 +1,10 @@
 import React from 'react'
-import { BarChart, Grid, StackedBarChart, Text } from 'react-native-svg-charts'
+import { View, BarChart, Grid, StackedBarChart, Text } from 'react-native-svg-charts'
 import { SQLite } from 'expo';
 
 const db = SQLite.openDatabase('db.db');
 
-class BarChartExample extends React.PureComponent {
+class BarChartExample extends React.Component {
     state = {
         items : null,
         summary : null
@@ -20,7 +20,7 @@ class BarChartExample extends React.PureComponent {
             })
         } else {
             db.transaction(tx => {
-                stx.executeSql('select * from sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
+                tx.executeSql('select * from sleep order by date',[],(tx,results)=>this.setState({items:results.rows._array}));
             })
         } 
     }
@@ -34,7 +34,14 @@ class BarChartExample extends React.PureComponent {
         const {color, screen, added} = this.props
         let data = []
         let fill = color
-        (added !== []) ? this.getData(screen) : null 
+        if (added !== []) {this.getData(screen)};
+        // if (this.state.items === null) {
+        //     return (
+        //         <View>
+        //             <Text>Hello</Text>
+        //         </View>
+        //     )
+        // }
         if (screen=='activity'){
             this.state.items !== null 
                 ? data = this.state.items.reverse().slice(0,7) 
@@ -75,14 +82,14 @@ class BarChartExample extends React.PureComponent {
             const keys   = [ 'duration' ]
             let data2 = []
             data.map(({id, duration, date})=>{
-                console.log(duration.split(':')[0])
+                // console.log(duration.split(':')[0])
                 let obj = {}
                 obj['date'] = date
                 obj['id'] = id
                 obj['duration'] = duration.split(':')[0]
                 data2.push(obj)
             })
-            console.log(data2)
+            // console.log(data2)
             return (
                 <StackedBarChart
                     style={ { height: 150 } }

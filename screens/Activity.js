@@ -19,7 +19,7 @@ class Activity extends React.Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.cardQuote}>Reading is to the mind what exercise is to the body -Joseph Addison</Text>
-                    <Card navigation={navigation} type={'sum'} title={'Summary'} buttonLabel={''} subtitle={''} color={''} screen={'activity'} added={added}/>
+                    <Card navigation={navigation} type={'sum'} title={'Summary'} buttonLabel={''} subtitle={''} color={'#FF4D3C'} screen={'activity'} added={added}/>
                     <Card navigation={navigation} type={'chart'} title={'Pedometer'} buttonLabel={'ADD STEPS'} subtitle={''} color={'#FF4D3C'}  screen={'activity'} added={added}/>
                     <Card navigation={navigation} type={'list'} title={'Activities'} buttonLabel={'ADD ACTIVITY'} subtitle={''} color={'#FF4D3C'} screen={'activity'} added={added}/>
                 </View>

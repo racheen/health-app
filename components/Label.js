@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View, TouchableHighlight, Modal, Alert, TextInput, DatePickerAndroid, TimePickerAndroid, DatePickerIOS} from 'react-native'
+import {Platform, StyleSheet, Text, View, TouchableHighlight, Modal, Alert, TextInput, DatePickerAndroid, TimePickerAndroid, DatePickerIOS} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { SQLite } from 'expo';
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 
 const db = SQLite.openDatabase('db.db');
 
@@ -581,15 +583,15 @@ class Label extends Component {
     }
   }
   
-  const styles = StyleSheet.create({
+  const styles = EStyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
     },
     label: {
-        padding: 10,
-        fontSize: 18,
-        height: 45,
+        padding: "10rem",
+        fontSize: "18rem",
+        height: "45rem",
         borderBottomWidth: 1,  
         borderColor: '#DADADA',
         flexDirection: 'row',
@@ -604,45 +606,45 @@ class Label extends Component {
       // marginBottom: 0, 
     },
     button: {
-      paddingLeft: 140,
-      paddingRight: 140,
-      paddingTop: 3,
-      paddingBottom: 3,
-      borderRadius: 10,
+      paddingLeft: "140rem",
+      paddingRight: "140rem",
+      paddingTop: "3rem",
+      paddingBottom: "3rem",
+      borderRadius: "10rem",
       backgroundColor: '#F0F0F0'
     },
     box: {
-        height: 180,
+        height: "180rem",
         // flex: 1,
         // width: 380,
         backgroundColor: '#F9F9F9',
-        margin: 10,
+        margin: "10rem",
     },
     cardLabel: {
-        fontSize:25, 
-        marginTop:12,
-        marginBottom:8,
-        marginLeft:18,
+        fontSize:"25rem", 
+        marginTop:"12rem",
+        marginBottom:"8rem",
+        marginLeft:"18rem",
         alignItems: 'center',
         fontFamily: 'ReemKufi'
     },
     divider: {
         borderBottomColor: '#BDBDBD',
-        borderBottomWidth: 1,
-        marginLeft: 12,
-        marginRight: 12
+        borderBottomWidth: "1rem",
+        marginLeft: "12rem",
+        marginRight: "12rem"
     },
     inputBox : { 
-      fontSize: 20,
-      height: 40, 
+      fontSize: "20rem",
+      height: "40rem", 
       fontFamily: 'ReemKufi',
       // borderBottomWidth: 1, 
       // borderBottomColor: 'gray', 
-      paddingLeft: 6, 
-      paddingRight: 5, 
-      paddingTop: 2,
-      paddingBottom: 2,
-      margin: 20,
+      paddingLeft: "6rem", 
+      paddingRight: "5rem", 
+      paddingTop: "2rem",
+      paddingBottom: "2rem",
+      margin: "20rem",
       // selectionColor: 'gray',
       // underlineColorAndroid: '#D3D3D3',
     }

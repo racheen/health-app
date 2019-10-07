@@ -34,8 +34,8 @@ class Summary extends Component {
     };
 
     render() {
-        const {screen, added} = this.props
-        (added !== []) ? this.getData(screen) : null 
+        const {screen, added} = this.props;
+        if (added !== []) {this.getData(screen)};
         if (screen === 'activity'){
             var duration, distance, calories, steps = 0
             this.state.items !== null ? duration = this.summation(this.state.items, "duration") : null
@@ -49,9 +49,9 @@ class Summary extends Component {
             );
         }else{
             var fats, proteins, calories = 0
-            this.state.items !== null ? fats = this.summation(this.state.items, "fats") : console.log('items is null')
-            this.state.items !== null ? proteins = this.summation(this.state.items, "proteins") : console.log('items is null')
-            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : console.log('items is null')   
+            this.state.items !== null ? fats = this.summation(this.state.items, "fats") : null
+            this.state.items !== null ? proteins = this.summation(this.state.items, "proteins") : null
+            this.state.items !== null ? calories = this.summation(this.state.items, "calories") : null   
             return(
                 <View style={{paddingBottom:10, paddingTop:10}}>
                     <SummaryContainer fats={fats} proteins={proteins} calories={calories} screen={screen}/>

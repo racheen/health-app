@@ -11,6 +11,8 @@ import AddMeal from "../screens/AddMeal.js"
 import Sleep from "../screens/Sleep.js"
 import AddSleep from "../screens/AddSleep.js"
 import Details from "../screens/Details.js"
+import Mindfulness from "../screens/Mindfulness"
+import AddEntry from "../screens/AddEntry"
 
 const tabs = {
   Home: {
@@ -93,6 +95,12 @@ const Titlebar = createAppContainer(
         title: `Sleep`,
       }),
     },
+    Mindfulness: {
+      screen: Mindfulness,
+      navigationOptions: () => ({
+        title: `Mindfulness`,
+      }),
+    },
     ADDACTIVITY: {
       screen: AddActivity,
       navigationOptions: () => ({
@@ -111,6 +119,12 @@ const Titlebar = createAppContainer(
         title: `Add Sleep`,
       }),
     },
+    ADDENTRY: {
+      screen: AddEntry,
+      navigationOptions: () => ({
+        title: `Add Entry`,
+      }),
+    },
     Activities: {
       screen: Details,
     },
@@ -124,6 +138,9 @@ const Titlebar = createAppContainer(
       screen: Details,
     },
     SleepDetails: {
+      screen: Details,
+    },
+    Entries: {
       screen: Details,
     }
   })

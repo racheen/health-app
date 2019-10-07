@@ -3,6 +3,8 @@ import React from "react";
 import { Pedometer, SQLite } from "expo";
 import { StyleSheet, Text, View } from "react-native";
 
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 const db = SQLite.openDatabase('db.db');
 
 export default class PedometerSensor extends React.Component {
@@ -89,18 +91,18 @@ export default class PedometerSensor extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   box:{
-      height: 154,
+      height: "154rem",
       // width: 380,
-      paddingLeft: 75,
-      paddingRight: 75,
-      margin: 10,
+      paddingLeft: "75rem",
+      paddingRight: "75rem",
+      margin: "10rem",
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 20,
+      borderRadius: "20rem",
       backgroundColor: '#FFFFFF',
-      borderWidth: 1,
+      borderWidth: "1rem",
       borderColor: '#ddd',
       borderBottomWidth: 0,
       shadowColor: '#000',
